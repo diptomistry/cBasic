@@ -7,6 +7,9 @@ int main() {
     int age = 25;//range:-10^9 to 10^9
     printf("Age: %d\n", age);
 
+    long long int bigNumber = 123456789123456789;//range:-10^18 to 10^18
+    printf("Big Number: %lld\n", bigNumber);
+
     // Floating-point
     float pi = 3.14159;// 6-7 decimal digits
     printf("Pi: %f\n", pi);
