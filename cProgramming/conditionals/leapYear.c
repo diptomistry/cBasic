@@ -19,3 +19,14 @@ If a year is divisible by 4, it's a leap year.
 However, if that year is also divisible by 100, it's not a leap year, unless...
 If the year is divisible by 400, then it is a leap year.
 */
+
+/*
+if (condition1 || condition2) {
+    // Code to execute if either condition1 or condition2 is true
+}
+
+if (condition1 && condition2) {
+    // Code to execute if both condition1 and condition2 are true
+}
+
+*/

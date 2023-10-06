@@ -7,12 +7,16 @@ int main() {
     scanf("%d", &grade);
     
     if (grade >= 90) {
-        printf("A\n");
+        printf("A+\n");
     } else if (grade >= 80) {
-        printf("B\n");
+        printf("A\n");
     } else if (grade >= 70) {
-        printf("C\n");
+        printf("A-\n");
     } else if (grade >= 60) {
+        printf("B\n");
+    } else if (grade >= 50) {
+        printf("C\n");
+    } else if (grade >= 40) {
         printf("D\n");
     } else {
         printf("F\n");
