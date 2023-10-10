@@ -17,8 +17,8 @@ int main()
         if (a > b)
         {
             dis = a - b;
-            ans++;
-            if (dis % 2 != 0)
+            ans++;//if dis is even
+            if (dis % 2 != 0)//odd
             {
                 ans++;
             }

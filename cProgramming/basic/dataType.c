@@ -36,6 +36,10 @@ int main() {
     //String
     char name[] = "Hello, World!";//C uses arrays of characters to represent strings
     printf("Name: %s\n", name);
+    
+    char inp[100];
+    scanf(" %1[^\n]", inp);
+    printf("%s",inp);
 
     float floatValue = 1234567.1234567;
     double doubleValue = 1234567.1234567;
