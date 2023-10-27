@@ -1,7 +1,9 @@
 #include <stdio.h>
-#include <stdlib.h>
 
-void findCommonAlphabets(char **strings, int numStrings) {
+#define MAX_STRINGS 10000
+#define MAX_STRING_LENGTH 10001
+
+void findCommonAlphabets(char strings[MAX_STRINGS][MAX_STRING_LENGTH], int numStrings) {
     if (numStrings <= 0) {
         printf("###\n"); // No common alphabets (no input strings)
         return;
@@ -38,11 +40,11 @@ void findCommonAlphabets(char **strings, int numStrings) {
     }
 
     if (commonCount == 0) {
-        printf("###\n"); 
+        printf("###\n"); // No common alphabets found
         return;
     }
 
-    
+    // Sort commonAlphabets array in alphabetical order
     for (int i = 0; i < commonCount - 1; i++) {
         for (int j = i + 1; j < commonCount; j++) {
             if (commonAlphabets[i] > commonAlphabets[j]) {
@@ -66,19 +68,17 @@ int main() {
     scanf("%d", &numStrings);
     getchar(); // Consume the newline character
 
-    char **strings = (char **)malloc(numStrings * sizeof(char *));
+    char strings[MAX_STRINGS][MAX_STRING_LENGTH];
+
     for (int i = 0; i < numStrings; i++) {
-        strings[i] = (char *)malloc(10001 * sizeof(char)); // Maximum string length is 10,000
-        scanf("%s", strings[i]);
+        if (scanf("%s", strings[i]) == EOF) {
+            // Handle input error
+            printf("Input error.\n");
+            return 1;
+        }
     }
 
     findCommonAlphabets(strings, numStrings);
-
-    // Free dynamically allocated memory
-    for (int i = 0; i < numStrings; i++) {
-        free(strings[i]);
-    }
-    free(strings);
 
     return 0;
 }
