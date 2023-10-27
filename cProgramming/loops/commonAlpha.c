@@ -1,9 +1,17 @@
 #include <stdio.h>
 
-void findCommonAlphabets(char strings[][100], int numStrings)
-{
-    if (numStrings <= 0)
-    {
+// Function to copy a string (character array)
+void copyString(char dest[], const char src[]) {
+    int i = 0;
+    while (src[i]) {
+        dest[i] = src[i];
+        i++;
+    }
+    dest[i] = '\0'; // Null-terminate the destination string
+}
+
+void findCommonAlphabets(char strings[][100], int numStrings) {
+    if (numStrings <= 0) {
         printf("No common alphabets (no input strings)\n");
         return;
     }
@@ -11,51 +19,44 @@ void findCommonAlphabets(char strings[][100], int numStrings)
     char commonAlphabets[26];
     int commonCount = 0;
 
-    char *firstString = strings[0];
-    // Start with the characters from the first string
+    char firstString[100]; // Declare firstString as a character array
+    copyString(firstString, strings[0]); // Copy the contents of strings[0] to firstString
+    //alternative:  char *firstString = strings[0];
 
     int i = 0;
-    
-    while (firstString[i])//jotokkhon porjonto null na pai
-    {
+
+    while (firstString[i]) {
         char c = firstString[i];
         int isCommon = 1;
 
-        for (int j = 1; j < numStrings; j++)
-        {
+        for (int j = 1; j < numStrings; j++) {
             int found = 0;
-            int k = 0; 
-            while (strings[j][k])
-            {
-                if (strings[j][k] == c)
-                {
+            int k = 0;
+            while (strings[j][k]) {
+                if (strings[j][k] == c) {
                     found = 1;
                     break;
                 }
-                k++; 
+                k++;
             }
-            if (!found)
-            {
+            if (!found) {
                 isCommon = 0;
                 break;
             }
         }
 
-        if (isCommon)
-        {
+        if (isCommon) {
             commonAlphabets[commonCount] = c;
             commonCount++;
         }
         i++;
     }
-    
+
     // Sort commonAlphabets array in alphabetical order
-    for (int i = 0; i < commonCount - 1; i++)
-    {
-        for (int j = i + 1; j < commonCount; j++)
-        {
-            if (commonAlphabets[i] > commonAlphabets[j])
-            {   //buble sort
+    for (int i = 0; i < commonCount - 1; i++) {
+        for (int j = i + 1; j < commonCount; j++) {
+            if (commonAlphabets[i] > commonAlphabets[j]) {
+                // Bubble sort
                 char temp = commonAlphabets[i];
                 commonAlphabets[i] = commonAlphabets[j];
                 commonAlphabets[j] = temp;
@@ -63,25 +64,21 @@ void findCommonAlphabets(char strings[][100], int numStrings)
         }
     }
 
-    for (int i = 0; i < commonCount; i++)
-    {
+    for (int i = 0; i < commonCount; i++) {
         printf("%c", commonAlphabets[i]);
     }
     printf("\n");
 }
 
-int main()
-{
+int main() {
     int numStrings;
 
     scanf("%d", &numStrings);
-    getchar(); //  Consume the newline character
+    getchar(); // Consume the newline character
 
     char strings[numStrings][100];
 
-    for (int i = 0; i < numStrings; i++)
-    {
-
+    for (int i = 0; i < numStrings; i++) {
         scanf("%s", strings[i]);
     }
 
