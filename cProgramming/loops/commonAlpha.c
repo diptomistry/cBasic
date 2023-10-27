@@ -1,98 +1,85 @@
 #include <stdio.h>
 
-int stringLength(const char* str) {
-    int length = 0;
-    while (str[length] != '\0') {
-        length++;
-    }
-    return length;
-}
+const int MAX_CHAR = 26;
 
-int stringCompare(const char* str1, const char* str2) {
-    int i = 0;
-    while (str1[i] != '\0' && str2[i] != '\0' && str1[i] == str2[i]) {
-        i++;
-    }
-    return str1[i] - str2[i];
-}
-
-void findCommonAlphabets(char strings[][10000], int numStrings) {
-    if (numStrings <= 0) {
-        printf("###\n");
-        return;
+void commonCharacters(char str[][10000], int n)
+{
+    
+    int prim[MAX_CHAR];
+    for (int i = 0; i < MAX_CHAR; i++)
+    {
+        prim[i] = 1;
     }
 
-    char commonAlphabets[26];
-    int commonCount = 0;
+  
+    for (int i = 0; i < n; i++)
+    {
+       
+        int sec[MAX_CHAR];
+        for (int j = 0; j < MAX_CHAR; j++)
+        {
+            sec[j] = 0;
+        }
 
-    char firstString[10000];
-    int i = 0;
-    while (strings[0][i] != '\0') {
-        firstString[i] = strings[0][i];
-        i++;
-    }
-    firstString[i] = '\0';
-
-    for (i = 0; firstString[i] != '\0'; i++) {
-        char c = firstString[i];
-        int isCommon = 1;
-
-        for (int j = 1; j < numStrings; j++) {
-            int found = 0;
-            int k = 0;
-            while (strings[j][k] != '\0') {
-                if (strings[j][k] == c) {
-                    found = 1;
-                    break;
-                }
-                k++;
-            }
-            if (!found) {
-                isCommon = 0;
-                break;
+     
+        for (int j = 0; str[i][j]; j++)
+        {
+           
+            if (prim[str[i][j] - 'a'])
+            {
+                sec[str[i][j] - 'a'] = 1;
             }
         }
 
-        if (isCommon) {
-            commonAlphabets[commonCount] = c;
-            commonCount++;
+        
+        for (int j = 0; j < MAX_CHAR; j++)
+        {
+            prim[j] = sec[j];
         }
     }
 
-    if (commonCount == 0) {
-        printf("###\n");
-        return;
+  
+    int foundCommon = 0;
+    for (int i = 0; i < MAX_CHAR; i++)
+    {
+        if (prim[i])
+        {
+            foundCommon = 1;
+            break;
+        }
     }
 
-    for (int i = 0; i < commonCount - 1; i++) {
-        for (int j = i + 1; j < commonCount; j++) {
-            if (commonAlphabets[i] > commonAlphabets[j]) {
-                char temp = commonAlphabets[i];
-                commonAlphabets[i] = commonAlphabets[j];
-                commonAlphabets[j] = temp;
+    if (foundCommon)
+    {
+
+        for (int i = 0; i < MAX_CHAR; i++)
+        {
+            if (prim[i])
+            {
+                printf("%c", i + 'a');
             }
         }
     }
-
-    for (int i = 0; i < commonCount; i++) {
-        printf("%c", commonAlphabets[i]);
+    else
+    {
+        printf("###");
     }
     printf("\n");
 }
 
-int main() {
-    int numStrings;
+int main()
+{
+    int n;
 
-    scanf("%d", &numStrings);
-    getchar();
+    scanf("%d", &n);
 
-    char strings[numStrings][10000];
+    char str[n][10000];
 
-    for (int i = 0; i < numStrings; i++) {
-        scanf("%s", strings[i]);
+    for (int i = 0; i < n; i++)
+    {
+        scanf("%s", str[i]);
     }
 
-    findCommonAlphabets(strings, numStrings);
-
+    commonCharacters(str, n);
     return 0;
 }
