@@ -2,7 +2,7 @@
 
 const int MAX_CHAR = 52; // 26 for lowercase and 26 for uppercase
 
-void commonCharacters(char str[][100], int n)
+void commonCharacters(char str[][10000], int n)
 {
 
     int common[MAX_CHAR];
@@ -75,7 +75,7 @@ int main()
     int n;
     scanf("%d", &n);
 
-    char str[n][100];
+    char str[n][10000];
 
     for (int i = 0; i < n; i++)
     {
