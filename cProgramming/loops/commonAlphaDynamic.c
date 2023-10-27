@@ -73,7 +73,6 @@ void commonCharacters(char str[][100], int n)
 int main()
 {
     int n;
-
     scanf("%d", &n);
 
     char str[n][100];
